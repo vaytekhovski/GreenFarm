@@ -15,7 +15,7 @@ namespace GreenFarm
         public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args)
-                //.UseUrls("http://*:80")
+                .UseUrls("http://*:7777")
                 .Build();
 
             host.Run();
