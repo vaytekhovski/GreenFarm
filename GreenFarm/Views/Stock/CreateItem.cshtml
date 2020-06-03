@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "";
+}
+
+@model GreenFarm.Models.Item
+
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>CreateItem</title>
+    <link rel="stylesheet" href="~/css/nicepage.css" media="screen">
+    <link rel="stylesheet" href="~/css/CreateItem.css" media="screen">
+    <script class="u-script" type="text/javascript" src="~/js/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="~/js/nicepage.js" defer=""></script>
+
+
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i">
+
+    <meta property="og:title" content="CreateItem">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#ff7070">
+    <link rel="canonical" href="index.html">
+    <meta property="og:url" content="index.html">
+</head>
+<body class="u-body">
+    <partial name="~/Views/Shared/Header.cshtml" />
+    <section class="u-clearfix u-section-1" id="sec-148e">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <h1 class="u-text u-text-default u-text-1">Создание товара</h1>
+            <div class="u-form u-form-1">
+
+                <div class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" name="form">
+                    <form enctype="multipart/form-data" asp-action="CreateItem" asp-controller="Stock">
+                        <div class="u-form-group u-form-group-1">
+                            <label for="text-eafd" class="u-form-control-hidden u-label u-text-body-alt-color"></label>
+                            <input type="file" asp-for="ImageFile" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                        </div>
+                        <div class="u-form-group u-form-group-2">
+                            <label for="text-c24c" class="u-form-control-hidden u-label u-text-body-alt-color"></label>
+                            <input type="text" asp-for="Name" placeholder="Название" id="text-c24c" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                        </div>
+                        <div class="u-form-group u-form-group-3">
+                            <label for="textarea-3792" class="u-form-control-hidden u-label u-text-body-alt-color"></label>
+                            <textarea placeholder="Описание" asp-for="Description" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"></textarea>
+                        </div>
+                        <div class="u-form-group u-form-group-4">
+                            <label for="text-b054" class="u-form-control-hidden u-label u-text-body-alt-color"></label>
+                            <input type="text" placeholder="Стоимость" asp-for="Price" id="text-b054" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                        </div>
+                        <div class="u-form-checkbox u-form-group u-form-group-5">
+                            <input type="checkbox" id="checkbox-fb79" asp-for="Available" value="On" checked="checked">
+                            <label for="checkbox-fb79" class="u-label u-text-body-alt-color">Доступен к покупке</label>
+                        </div>
+                        <div class="u-align-left u-form-group u-form-submit">
+                            <button type="submit" class="u-border-2 u-border-palette-1-base u-btn u-btn-submit u-button-style u-none u-btn-2">Создать</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <partial name="~/Views/Shared/Footer.cshtml" />
+</body>
+</html>

@@ -1,0 +1,70 @@
+﻿@{
+    Layout = "";
+}
+
+@model GreenFarm.Models.User
+
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>SignIn</title>
+    <link rel="stylesheet" href="~/css/nicepage.css" media="screen">
+    <link rel="stylesheet" href="~/css/SignIn.css" media="screen">
+    <script class="u-script" type="text/javascript" src="~/js/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="~/js/nicepage.js" defer=""></script>
+
+
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+   
+    <meta property="og:title" content="SignIn">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#ff7070">
+    <link rel="canonical" href="index.html">
+    <meta property="og:url" content="index.html">
+</head>
+<body class="u-body">
+
+    <section class="u-align-center u-clearfix u-section-1" id="sec-fbb7">
+        <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+            <div class="u-border-10 u-border-palette-1-base u-container-style u-group u-group-1" data-animation-name="pulse" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="">
+                <div class="u-container-layout u-container-layout-1">
+                    <h2 class="u-align-center u-text u-text-1">Вход</h2>
+                    <a asp-action="Registration" asp-controller="User">
+                        <h3 class="u-align-center u-text u-text-default u-text-2">Регистрация</h3>
+                    </a>
+                    <p class="u-align-center u-text u-text-default u-text-palette-1-base u-text-2">@ViewBag.Error</p>
+                    <div class="u-form u-form-1">
+
+                        <div class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" name="form">
+                            <form asp-action="SignIn" asp-controller="User">
+                                <div class="u-form-group u-form-name">
+                                    <label for="name-31bd" class="u-form-control-hidden u-label">Name</label>
+                                    <input asp-for="PhoneNumber" type="text" placeholder="Введите свой номер" id="phonenumber-31bd" name="phonenumber" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                                </div>
+                                <div class="u-form-group u-form-name">
+                                    <label for="name-31bd" class="u-form-control-hidden u-label">Name</label>
+                                    <input asp-for="Password" type="password" placeholder="Придумайте пароль" id="password-31bd" name="password" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                                </div>
+                                <div class="u-align-center u-form-group u-form-submit">
+                                    <button type="submit" class="u-border-2 u-border-palette-1-base u-btn u-btn-submit u-button-style u-none u-btn-2">Войти</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <partial name="~/Views/Shared/Footer.cshtml" />
+
+</body>
+</html>

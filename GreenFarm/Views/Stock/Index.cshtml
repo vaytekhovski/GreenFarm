@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "";
+}
+
+@model GreenFarm.ViewModels.StockModel
+
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>Stock</title>
+    <link rel="stylesheet" href="~/css/nicepage.css" media="screen">
+    <link rel="stylesheet" href="~/css/Stock.css" media="screen">
+    <script class="u-script" type="text/javascript" src="~/js/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="~/js/nicepage.js" defer=""></script>
+
+
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i">
+
+    <meta property="og:title" content="Stock">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#ff7070">
+    <link rel="canonical" href="index.html">
+    <meta property="og:url" content="index.html">
+</head>
+<body class="u-body">
+    <partial name="~/Views/Shared/Header.cshtml" />
+
+    <section class="u-clearfix u-section-1" id="sec-4c97">
+        <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+            <a asp-action="CreateItem" asp-controller="Stock" class="u-border-2 u-border-palette-1-base u-btn u-button-style u-none u-btn-1">Создать новый товар</a>
+        </div>
+    </section>
+
+    @foreach (var item in Model.ItemList)
+    {
+        <section class="u-clearfix u-section-2" id="sec-a49f">
+            <div class="u-clearfix u-sheet u-sheet-1">
+                <div class="u-clearfix u-expanded-width u-gutter-10 u-layout-wrap u-layout-wrap-1">
+                    <div class="u-gutter-0 u-layout">
+                        <div class="u-layout-row">
+                            <div class="u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-1">
+                                <div class="u-container-layout u-valign-middle u-container-layout-1">
+                                    <img class="u-expand-resize u-image u-image-contain u-image-1" src="@item.ImagePath" data-image-width="1356" data-image-height="1230" data-animation-name="pulse" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="">
+                                </div>
+                            </div>
+                            <div class="u-align-center u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-2">
+                                <div class="u-container-layout u-valign-middle u-container-layout-2">
+                                    <h1 class="u-text u-text-default u-text-1">@item.Name</h1>
+                                    <p class="u-text u-text-default u-text-2">@item.Description</p>
+                                    <a href="#" class="u-border-radius-10 u-btn u-btn-round u-button-style u-custom-font u-heading-font u-palette-2-base u-btn-1" data-animation-name="pulse" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="" title="Добавить в корзину">
+                                        Добавить в корзину<br>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+
+
+
+    <partial name="~/Views/Shared/Footer.cshtml" />
+    <partial name="~/Views/Shared/ToTop.cshtml" />
+
+</body>
+</html>
