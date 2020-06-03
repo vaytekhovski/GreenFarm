@@ -1,0 +1,209 @@
+﻿@{
+    Layout = "";
+}
+
+@model GreenFarm.ViewModels.CartModel
+
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>Cart</title>
+    <link rel="stylesheet" href="~/css/nicepage.css" media="screen">
+    <link rel="stylesheet" href="~/css/Cart.css" media="screen">
+    <script class="u-script" type="text/javascript" src="~/js/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="~/js/nicepage.js" defer=""></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+
+
+
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i">
+
+    <meta property="og:title" content="Cart">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#ff7070">
+    <link rel="canonical" href="index.html">
+    <meta property="og:url" content="index.html">
+</head>
+<body class="u-body">
+    <partial name="~/Views/Shared/Header.cshtml" />
+    <section class="u-clearfix u-section-1" id="sec-5652">
+        <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+            <h1 class="u-text u-text-default u-text-1">Корзина</h1>
+        </div>
+    </section>
+
+    <form asp-action="Index" asp-controller="Cart" method="post">
+        @for (var i = 0; i < Model.OrderList.Count; i++) 
+        {
+            <section class="u-align-center u-clearfix u-section-2" id="@Model.OrderList[i].item.Id">
+                <div class="u-clearfix u-sheet u-sheet-1">
+                    <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+                        <div class="u-layout">
+                            <div class="u-layout-row">
+                                <div class="u-size-12 u-size-30-md">
+                                    <div class="u-layout-col">
+                                        <div class="u-align-center u-container-style u-layout-cell u-left-cell u-size-60 u-layout-cell-1">
+                                            <div class="u-container-layout u-valign-top u-container-layout-1">
+                                                <img src="@Model.OrderList[i].item.ImagePath" alt="" class="u-expanded-width u-image u-image-contain u-image-default u-image-1" data-image-width="1356" data-image-height="1230">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="u-size-30-md u-size-36">
+                                    <div class="u-layout-col">
+                                        <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
+                                            <div class="u-container-layout u-valign-bottom u-container-layout-2">
+                                                <h2 class="u-text u-text-default u-text-1">@Model.OrderList[i].item.Name</h2>
+                                            </div>
+                                        </div>
+                                        <div class="u-align-left u-container-style u-layout-cell u-size-30 u-layout-cell-3">
+                                            <div class="u-container-layout u-container-layout-3">
+                                                <p class="u-text u-text-default u-text-2">@Model.OrderList[i].item.Description</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="u-size-12 u-size-60-md">
+                                    <div class="u-layout-col">
+                                        <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-60 u-layout-cell-4">
+                                            <div class="u-container-layout u-valign-bottom u-container-layout-4">
+                                                <h2 class="u-align-center u-text u-text-3">@Model.OrderList[i].item.Price</h2>
+                                                <input type="hidden" asp-for="@Model.OrderList[i].item.Id" />
+                                                <input type="hidden" asp-for="@Model.OrderList[i].item.Name" />
+                                                <input type="number" style="display:none" value="@Model.OrderList[i].item.Price" asp-for="@Model.OrderList[i].item.Price" />
+                                                <input type="hidden" asp-for="@Model.OrderList[i].item.Description" />
+                                                <div class="u-expanded-width u-form u-form-1">
+
+                                                    <div class="u-clearfix u-form-spacing-7 u-form-vertical u-inner-form" style="padding: 10px" name="form">
+                                                        <div class="u-carousel-duration-750 u-form-group u-form-select u-gutter-0 u-menu-dropdown u-video-cover u-form-group-1">
+                                                            <label for="select-c8b3" class="u-carousel-duration-750 u-form-control-hidden u-gutter-0 u-label u-menu-dropdown u-video-cover">Выбрать</label>
+                                                            <div class="u-form-select-wrapper">
+                                                                <select onchange="ChangeTotalPrice()" id="Count" asp-for="@Model.OrderList[i].Count" class="u-border-1 u-border-grey-30 u-carousel-duration-750 u-gutter-0 u-input u-input-rectangle u-menu-dropdown u-palette-5-light-3 u-video-cover u-input-1">
+                                                                    <option value="1">1 шт.</option>
+                                                                    <option value="2">2 шт.</option>
+                                                                    <option value="3">3 шт.</option>
+                                                                    <option value="4">4 шт.</option>
+                                                                    <option value="5">5 шт.</option>
+                                                                    <option value="6">6 шт.</option>
+                                                                    <option value="7">7 шт.</option>
+                                                                    <option value="8">8 шт.</option>
+                                                                    <option value="9">9 шт.</option>
+                                                                    <option value="10">10 шт.</option>
+                                                                </select>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+                                                            </div>
+                                                        </div>
+                                                        <div class="u-align-left u-form-group u-form-submit">
+                                                            <text onclick="RemoveOrder(@Model.OrderList[i].item.Id)"  class="u-border-2 u-border-palette-1-base u-btn u-btn-rectangle u-button-style u-none u-btn-1">
+                                                                Удалить<br>
+                                                            </text>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-border-2 u-border-white u-expanded-width u-line u-line-horizontal u-opacity u-opacity-40 u-line-1"></div>
+                </div>
+            </section>
+        }
+
+        <section class="u-clearfix u-section-3" id="ConfirmOrder">
+            <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+                <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+                    <div class="u-layout">
+                        <div class="u-layout-row">
+                            <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
+                                <div class="u-container-layout u-container-layout-1">
+                                    <h1 id="TotalPrice" class="u-text u-text-default u-text-1" data-animation-name="jackInTheBox" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="">Итого: 7р.</h1>
+                                </div>
+                            </div>
+                            <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
+                                <div class="u-container-layout u-valign-top u-container-layout-2">
+                                    <div class="u-form u-form-1">
+                                        <div class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" name="form-1">
+                                            <div class="u-carousel-duration-750 u-form-group u-form-radiobutton u-gutter-0 u-menu-dropdown u-video-cover u-form-group-1">
+                                                <div class="u-form-radio-button-wrapper">
+                                                    @Html.RadioButtonFor(m => m.PaymentMethod, "Оплата наличными")
+                                                    <label class="u-label u-text-body-alt-color u-label-1" for="is_cash">Оплата наличными</label>
+                                                    <br>
+                                                    @Html.RadioButtonFor(m => m.PaymentMethod, "Оплата картой на сайте")
+                                                    <label class="u-label u-text-body-alt-color u-label-2" for="is_card">Оплата картой на сайте</label>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                            <div class="u-align-left u-form-group u-form-submit">
+                                                <button type="submit" class="u-border-2 u-border-palette-1-base u-btn u-btn-submit u-button-style u-none u-btn-1">
+                                                    Заказать
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </form>
+
+    <partial name="~/Views/Shared/Footer.cshtml" />
+    <partial name="~/Views/Shared/ToTop.cshtml" />
+
+</body>
+</html>
+
+<script>
+    $(window).bind("load", function () {
+        ChangeTotalPrice();
+        isCardEmpty();
+    });
+
+    function isCardEmpty() {
+        if ($('input[type=number]').length) {
+        }
+        else {
+            $('#ConfirmOrder').remove();
+        }
+    }
+
+    function ChangeTotalPrice() {
+        var totalPrice = 0;
+
+        var prices = $('input[type=number]').map(function () {
+            return this.value;
+        }).get();
+
+        var counts = $('select').map(function () {
+            return this.value;
+        }).get();
+
+        var i = 0;
+        while (i < prices.length) {
+            totalPrice += prices[i] * counts[i];
+            i++;
+        }
+       
+        $('#TotalPrice').text("Всего: " + totalPrice + "р.");
+    }
+
+    function RemoveOrder(Id) {
+        var idstr = '#' + Id;
+        $(idstr).remove();
+        isCardEmpty();
+        ChangeTotalPrice();
+    }
+</script>

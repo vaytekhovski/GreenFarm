@@ -10,6 +10,7 @@
     <Folder Include="Views\User\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\Stock\" />
+    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Home\Home.cshtml" />
