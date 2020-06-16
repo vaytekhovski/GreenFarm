@@ -8,10 +8,11 @@ namespace GreenFarm.ViewModels
     {
         public CartModel()
         {
-            OrderList = new List<Order>();
+            OrderList = new List<OrderElement>();
         }
 
-        public List<Order> OrderList { get; set; }
+        public string UserName { get; set; }
+        public List<OrderElement> OrderList { get; set; }
         public decimal TotalPrice { get; set; }
         public string PaymentMethod { get; set; }
     }

@@ -18,6 +18,9 @@ namespace GreenFarm.Models
         public string Description { get; set; }
         public decimal Price { get; set; }
         public bool Available { get; set; }
+        public int GrowDays { get; set; }
+        public int BlackOutDays { get; set; }
+        public int ClipDays { get; set; }
 
     }
 }

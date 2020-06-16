@@ -24,7 +24,7 @@ namespace GreenFarm.Controllers
 
             foreach (var item in Items)
             {
-                model.OrderList.Add(new Order
+                model.OrderList.Add(new OrderElement
                 {
                     item = item,
                     Count = 1
@@ -36,8 +36,38 @@ namespace GreenFarm.Controllers
         [HttpPost]
         public IActionResult Index(CartModel model)
         {
-            var a = 1;
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        public IActionResult Create(CartModel cart)
+        {
+            using (Database db = new Database())
+            {
+                var Order = new Order()
+                {
+                    Created = DateTime.Now,
+                    OrderElements = cart.OrderList,
+                    UserName = cart.UserName
+                };
+                db.Orders.Add(Order);
+                db.SaveChanges();
+                var OrderId = db.Orders.Last(x => x.UserName == cart.UserName).Id;
+
+                foreach (var item in cart.OrderList)
+                {
+                    item.OrderId = OrderId;
+                    db.OrderElements.Add(item);
+                }
+                db.SaveChanges();
+
+            }
+            return View(cart);
         }
 
     }
