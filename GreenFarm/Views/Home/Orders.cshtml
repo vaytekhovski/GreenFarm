@@ -93,7 +93,10 @@
                                             <form asp-action="StartGrowOrder">
                                                 <div class="u-align-center u-form-group u-form-submit">
                                                     <input type="hidden" asp-for="@Order.Id" value="@Order.Id" />
-                                                    <input type="submit" value="Начать" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
+                                                    @if (Order.Status == "Не начат")
+                                                    {
+                                                        <input type="submit" value="Начать" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
+                                                    }
                                                 </div>
                                             </form>
                                         </div>
