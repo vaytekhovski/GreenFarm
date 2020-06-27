@@ -40,12 +40,13 @@ namespace GreenFarm.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult CreateOrder()
         {
             return View();
         }
 
-        public IActionResult Create(CartModel cart)
+        [HttpPost]
+        public IActionResult CreateOrder(CartModel cart)
         {
             using (Database db = new Database())
             {

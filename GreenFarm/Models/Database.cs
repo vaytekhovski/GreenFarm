@@ -18,7 +18,7 @@ namespace GreenFarm.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL("Server=157.230.97.233;Port=6606;Database=GF;Uid=pro;Pwd=rsE>9S^2Fu:kNVc:");
+                optionsBuilder.UseMySQL("Server=157.230.97.233;Port=6606;Database=GF;Uid=pro;Pwd=rsE>9S^2Fu:kNVc:;charset=utf8") ;
             }
         }
 

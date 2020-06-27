@@ -1,0 +1,140 @@
+﻿@{
+    Layout = "";
+}
+
+@model GreenFarm.ViewModels.OrderModel
+
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>Order</title>
+    <link rel="stylesheet" href="~/css/nicepage.css" media="screen">
+    <link rel="stylesheet" href="~/css/Order.css" media="screen">
+    <script class="u-script" type="text/javascript" src="~/js/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="~/js/nicepage.js" defer=""></script>
+
+
+
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+
+    <meta property="og:title" content="Order">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#ff7070">
+    <link rel="canonical" href="index.html">
+    <meta property="og:url" content="index.html">
+</head>
+<body class="u-body">
+
+    <partial name="~/Views/Shared/Header.cshtml" />
+
+    <section class="u-clearfix u-section-1" id="sec-9318">
+        <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+            <h3 class="u-text u-text-default u-text-1">
+                <a href="~/Home/Orders">Все заказы</a>
+            </h3>
+        </div>
+    </section>
+    <section class="u-clearfix u-section-2" id="sec-222a">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+                <div class="u-layout">
+                    <div class="u-layout-col">
+                        <div class="u-size-30">
+                            <div class="u-layout-row">
+                                <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
+                                    <div class="u-container-layout u-container-layout-1">
+                                        <h2 class="u-text u-text-default u-text-1">Заказ @Model.Order.Id</h2>
+                                        <h3 class="u-text u-text-default u-text-2">@Model.Order.UserName</h3>
+                                        <h4 class="u-text u-text-default u-text-3">@Model.Order.Created</h4>
+                                    </div>
+                                </div>
+                                <div class="u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
+                                    <div class="u-container-layout u-container-layout-2"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="u-size-30">
+                            <div class="u-layout-row">
+                                <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-3">
+                                    <div class="u-container-layout u-container-layout-3">
+                                        <ul class="u-text u-text-default u-text-4">
+                                            @foreach (var el in Model.Order.OrderElements)
+                                            {
+                                                string amount = el.Count == 1 ? "" : "x" + el.Count;
+
+                                                <li>@el.item.Name @amount</li>
+                                            }
+                                        </ul>
+                                        <div class="u-form u-form-1">
+                                            <div class="u-clearfix u-form-custom-backend u-form-horizontal u-form-spacing-10 u-inner-form" style="padding: 10px" name="form">
+                                                <form asp-for="AddElementToOrder">
+                                                    <input type="hidden" asp-for="Order.Id" value="@Model.Order.Id" />
+                                                    <div class="u-form-group u-form-select u-form-group-1">
+                                                        <label for="select-0ba9" class="u-form-control-hidden u-label">Выбрать</label>
+                                                        <div class="u-form-select-wrapper">
+                                                            <select id="select-0ba9" asp-for="ItemId" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                                                                @foreach (var item in Model.Items)
+                                                                {
+                                                                <option value="@item.Id">@item.Name</option>
+                                                                }
+                                                            </select>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="u-form-group u-form-group-2">
+                                                        <label for="text-fb5a" class="u-form-control-hidden u-label"></label>
+                                                        <input type="text" placeholder="Количество" id="text-fb5a" asp-for="Amount" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                                                    </div>
+                                                    <div class="u-align-left u-form-group u-form-submit">
+                                                        <input type="submit" asp-action="AddElementToOrder" asp-controller="Home" value="Добавить" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="u-align-center u-container-style u-layout-cell u-size-15">
+                                    <div class="u-container-layout u-container-layout-4">
+                                        <h4 class="u-text u-text-5">Посажено:</h4>
+                                        <ul class="u-text u-text-6">
+                                            @foreach (var el in Model.Grows)
+                                            {
+                                            <li style="">
+                                                @el.GrowStart<br>@el.item.Name
+                                            </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="u-align-center u-container-style u-layout-cell u-right-cell u-size-15 u-layout-cell-5">
+                                    <div class="u-container-layout u-container-layout-5">
+                                        <h4 class="u-text u-text-7">Не посажено</h4>
+                                        <ul class="u-text u-text-8">
+                                            @foreach (var el in Model.NotGrows)
+                                            {
+                                            <li style="">
+                                                @el.GrowStart<br>@el.item.Name
+                                            </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <partial name="~/Views/Shared/Footer.cshtml" />
+</body>
+</html>

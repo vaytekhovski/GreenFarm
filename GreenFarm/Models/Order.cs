@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using MySql.Data.EntityFrameworkCore.DataAnnotations;
 
 namespace GreenFarm.Models
 {
@@ -7,6 +9,7 @@ namespace GreenFarm.Models
     {
         public Order()
         {
+            OrderElements = new List<OrderElement>();
         }
 
         public int Id { get; set; }
@@ -14,6 +17,6 @@ namespace GreenFarm.Models
         public string UserName { get; set; }
         public DateTime Created { get; set; }
         public List<OrderElement> OrderElements { get; set; }
-        public bool isClosed { get; set; }
+        public string Status { get; set; }
     }
 }

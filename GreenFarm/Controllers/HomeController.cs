@@ -49,7 +49,7 @@ namespace GreenFarm.Controllers
             using(Database db = new Database())
             {
                 
-                var Orders = db.Orders.Where(x => x.isClosed == false).ToList();
+                var Orders = db.Orders.ToList();
                 foreach (var order in Orders)
                 {
                     order.OrderElements = db.OrderElements
@@ -60,6 +60,7 @@ namespace GreenFarm.Controllers
                     foreach (var orderElement in order.OrderElements)
                     {
                         orderElement.item = db.Items.First(x => x.Id == orderElement.ItemId);
+                        orderElement.UserName = order.UserName;
                     }
 
                     
@@ -88,16 +89,90 @@ namespace GreenFarm.Controllers
                     }
                 }
             }
-            return View(OrderList);
+
+            OrdersModel Model = new OrdersModel();
+
+            var Today = OrderList.Where(x => x.Created.Date == DateTime.Now.Date).ToList();
+            var Yesterday = OrderList.Where(x => x.Created.Date == DateTime.Now.Date.AddDays(-1)).ToList();
+            var Before = OrderList.Where(x => x.Created.Date < DateTime.Now.Date.AddDays(-1)).ToList();
+
+            Model.Today = Today;
+            Model.Yesterday = Yesterday;
+            Model.Before = Before;
+
+            return View(Model);
         }
 
-        public IActionResult StartGrowOrder(int OrderId)
+        [HttpGet]
+        public IActionResult CreateOrder()
         {
-            var order = new Order();
+            var Order = new Order();
+            return View(Order);
+        }
+
+        [HttpPost]
+        public IActionResult CreateOrder(Order order)
+        {
+            using(Database db = new Database())
+            {
+                order.Created = DateTime.Now;
+                db.Orders.Add(order);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Order", new { OrderId = order.Id});
+        }
+
+        public IActionResult Order(int OrderId)
+        {
+            var OrderModel = new OrderModel();
+            var Order = new Order();
+            using(Database db = new Database())
+            {
+                Order = db.Orders.First(x => x.Id == OrderId);
+                Order.OrderElements = db.OrderElements.Where(x => x.OrderId == OrderId).ToList();
+                foreach (var orderEl in Order.OrderElements)
+                {
+                    orderEl.item = db.Items.First(x => x.Id == orderEl.ItemId);
+                }
+
+                OrderModel.Items = db.Items.ToList();
+            }
+
+            OrderModel.Order = Order;
+            var GrowsElements = Order.OrderElements.Where(x => x.isGrow == true).ToList();
+            if(GrowsElements.Count != 0)
+                OrderModel.Grows.AddRange(GrowsElements);
+
+            var NotGrowsElements = Order.OrderElements.Where(x => x.isGrow != true).ToList();
+            if (NotGrowsElements.Count != 0)
+                OrderModel.NotGrows.AddRange(NotGrowsElements);
+
+            return View(OrderModel);
+        }
+
+        public IActionResult AddElementToOrder(OrderModel orderModel)
+        {
+            using(Database db = new Database())
+            {
+                db.OrderElements.Add(new OrderElement
+                {
+                    OrderId = orderModel.Order.Id,
+                    ItemId = orderModel.ItemId,
+                     Count = orderModel.Amount
+                });
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Order", new { OrderId = orderModel.Order.Id });
+        }
+
+        public IActionResult StartGrowOrder(Order order)
+        {
             using (Database db = new Database())
             {
-                order = db.Orders.First(x => x.Id == OrderId);
-                order.OrderElements = db.OrderElements.Where(x => x.OrderId == OrderId).ToList();
+                order = db.Orders.First(x => x.Id == order.Id);
+                order.OrderElements = db.OrderElements.Where(x => x.OrderId == order.Id).ToList();
                 foreach (var orderElement in order.OrderElements)
                 {
                     orderElement.item = db.Items.First(x => x.Id == orderElement.ItemId);
@@ -110,21 +185,39 @@ namespace GreenFarm.Controllers
                     orderElement.GrowStart = DateTime.Now.AddDays(maxGrowDays - orderElement.item.GrowDays);
                     orderElement.HarvestDate = orderElement.GrowStart.AddDays(orderElement.item.GrowDays);
                 }
+
+                order.Status = "В процессе";
                 db.SaveChanges();
             }
 
             return RedirectToAction("Orders");
         }
 
-        public IActionResult Grow(int orderElementId)
+        public IActionResult StartGrowElement(OrderElement element)
         {
             using(Database db = new Database())
             {
-                var element = db.OrderElements.First(x => x.Id == orderElementId);
+                element = db.OrderElements.First(x => x.Id == element.Id);
                 element.isGrow = true;
+                element.GrowStart = DateTime.Now;
                 db.SaveChanges();
             }
             return RedirectToAction("Calendar");
+        }
+
+        public IActionResult Grow()
+        {
+            List<OrderElement> orderElements = new List<OrderElement>();
+            using(Database db =new Database())
+            {
+                orderElements = db.OrderElements.Where(x => x.isGrow == true).OrderByDescending(x => x.GrowStart).ToList();
+                foreach (var element in orderElements)
+                {
+                    element.item = db.Items.FirstOrDefault(x => x.Id == element.ItemId);
+                    element.UserName = db.Orders.FirstOrDefault(x => x.Id == element.OrderId).UserName;
+                }
+            }
+            return View(orderElements);
         }
 
     }

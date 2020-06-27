@@ -1,0 +1,34 @@
+.u-section-1 .u-sheet-1 {min-height: 89px}
+.u-section-1 .u-text-1 {margin: 21px 0}.u-section-2 .u-sheet-1 {min-height: 248px}
+.u-section-2 .u-image-1 {width: 241px; height: 209px; margin: 10px auto 0 10px}
+.u-section-2 .u-text-1 {margin: -195px 773px 0 261px}
+.u-section-2 .u-text-2 {font-size: 1.25rem; margin: 46px auto 0 261px}
+.u-section-2 .u-form-1 {height: 67px; margin: -107px 0 0 840px}
+.u-section-2 .u-btn-1 {background-image: none; border-style: solid}
+.u-section-2 .u-text-3 {margin: -105px auto 60px 261px} 
+
+@media (max-width: 1199px){ .u-section-2 .u-text-1 {margin-right: 673px; margin-left: 215px}
+.u-section-2 .u-text-2 {margin-left: 215px}
+.u-section-2 .u-form-1 {margin-left: 640px}
+.u-section-2 .u-text-3 {margin-left: 215px} }
+
+@media (max-width: 991px){ .u-section-2 .u-text-1 {margin-right: 563px; margin-left: 165px}
+.u-section-2 .u-text-2 {margin-left: 165px}
+.u-section-2 .u-form-1 {height: 71px; margin-top: -84px; margin-right: -109px; margin-left: 529px}
+.u-section-2 .u-text-3 {margin-top: -69px; margin-left: 165px} }
+
+@media (max-width: 767px){ .u-section-2 .u-sheet-1 {min-height: 288px}
+.u-section-2 .u-image-1 {margin-top: 20px; margin-left: 20px}
+.u-section-2 .u-text-1 {width: auto; margin-top: -198px; margin-right: 214px; margin-left: auto}
+.u-section-2 .u-text-2 {width: auto; margin-top: 31px; margin-right: 16px; margin-left: auto}
+.u-section-2 .u-form-1 {margin-top: 21px; margin-right: 58px; margin-left: 272px}
+.u-section-2 .u-text-3 {margin-top: -117px; margin-left: 124px} }
+
+@media (max-width: 575px){ .u-section-2 .u-image-1 {margin-top: 40px; margin-right: 47px; margin-left: auto}
+.u-section-2 .u-text-1 {margin-top: -249px; margin-right: 135px}
+.u-section-2 .u-text-2 {margin-top: 199px; margin-right: 18px}
+.u-section-2 .u-form-1 {margin-top: 20px; margin-right: -61px; margin-left: 101px}
+.u-section-2 .u-text-3 {margin-top: -128px; margin-left: 78px} }.u-section-3 .u-sheet-1 {min-height: 89px}
+.u-section-3 .u-text-1 {margin: 21px 0}.u-section-4 .u-sheet-1 {min-height: 89px}
+.u-section-4 .u-text-1 {margin: 21px 0}.u-section-5 .u-sheet-1 {min-height: 89px}
+.u-section-5 .u-text-1 {margin: 21px 0}
