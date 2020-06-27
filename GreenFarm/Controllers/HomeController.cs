@@ -116,6 +116,7 @@ namespace GreenFarm.Controllers
             using(Database db = new Database())
             {
                 order.Created = DateTime.Now;
+                order.Status = "Не начат";
                 db.Orders.Add(order);
                 db.SaveChanges();
             }
