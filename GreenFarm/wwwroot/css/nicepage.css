@@ -10892,6 +10892,16 @@ section.u-image,
     transform: translateY(-50%);
   }
 }
+@media (max-width: 767px) {
+  .u-layout-wrap .u-layout {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .u-layout-wrap .u-layout .u-layout-cell {
+    border-left: 0 !important;
+    border-right: 0 !important;
+  }
+}
 .u-sheet.u-content-layout {
   display: flex;
   flex-wrap: nowrap;
@@ -14861,6 +14871,7 @@ p {
     text-align: justify;
   }
 }
+.u-repeater-item:not([class*="u-align-"]),
 .u-container-style:not([class*="u-align-"]) {
   text-align: left;
 }
@@ -16021,21 +16032,46 @@ a.pswp__share--download:hover {
 }
 .u-custom-list {
   list-style-type: none;
-  padding-left: 1.4em;
+  padding-left: 0;
+}
+.u-custom-list li {
+  margin-left: 1.4em;
 }
 .u-custom-list .u-list-icon {
   display: inline-block;
   position: absolute;
   width: 1em;
-  height: 1em;
-  vertical-align: baseline;
-  margin-left: -1.3em;
-  margin-top: 0.1em;
+  min-height: 1em;
+  height: auto;
+  left: 0.1em;
+  fill: currentColor;
+  text-align: center;
 }
-.u-custom-list .u-list-icon > svg {
-  margin: 0.1em;
-  width: 0.8em;
-  height: 0.8em;
+.u-custom-list .u-list-icon > :first-child {
+  display: inline-block;
+  position: relative;
+  margin: -0.8em;
+  font-size: 0.8em;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  line-height: 0.9;
+}
+.u-text-icon {
+  position: relative;
+  font-size: 1em;
+  fill: currentColor;
+  vertical-align: middle;
+}
+.u-text-icon > :first-child {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1em;
+  height: 1em;
+  transform: translate(-50%, -50%);
+  line-height: 1;
 }
 .u-login {
   display: inline-block;

@@ -16,6 +16,8 @@ namespace GreenFarm.Models
         public int UserId { get; set; }
         public string UserName { get; set; }
         public DateTime Created { get; set; }
+        public DateTime? Harvest { get; set; }
+
         public List<OrderElement> OrderElements { get; set; }
         public string Status { get; set; }
     }

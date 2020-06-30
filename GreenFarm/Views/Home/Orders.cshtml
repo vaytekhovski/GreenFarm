@@ -43,6 +43,87 @@
     </section>
     @foreach (var Order in Model.Today)
     {
+
+        <section class="u-clearfix u-section-3" id="sec-208f">
+            <div class="u-clearfix u-sheet u-sheet-1">
+                <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
+                    <div class="u-gutter-0 u-layout">
+                        <div class="u-layout-row">
+                            <div class="u-size-42">
+                                <div class="u-layout-col">
+                                    <div class="u-size-30">
+                                        <div class="u-layout-row">
+                                            <div class="u-container-style u-layout-cell u-right-cell u-size-33 u-layout-cell-1">
+                                                <div class="u-container-layout u-container-layout-1">
+                                                    <h2 class="u-text u-text-default u-text-1"><a href="~/Home/Order?OrderId=@Order.Id">Заказ @Order.Id</a></h2>
+                                                    <h3 class="u-text u-text-default u-text-2">@Order.UserName</h3>
+                                                </div>
+                                            </div>
+                                            <div class="u-container-style u-layout-cell u-size-27 u-layout-cell-2">
+                                                <div class="u-container-layout u-valign-top u-container-layout-2">
+                                                    <h4 class="u-text u-text-default u-text-3">@Order.Created.ToShortDateString()</h4>
+                                                    <h3 class="u-align-center u-text u-text-default u-text-4">@Order.Status</h3>
+                                                    @if (Order.Harvest != null)
+                                                    {
+                                                    <h4 class="u-align-center u-text u-text-default u-text-5">@Order.Harvest.Value.ToShortDateString()</h4>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="u-size-30">
+                                        <div class="u-layout-row">
+                                            <div class="u-container-style u-layout-cell u-right-cell u-size-60 u-layout-cell-3">
+                                                <div class="u-container-layout u-container-layout-3">
+                                                    <ul class="u-text u-text-6">
+                                                        @foreach (var el in Order.OrderElements)
+                                                        {
+                                                            string amount = el.Count == 1 ? "" : "x" + el.Count;
+
+                                                            <li>@el.item.Name @amount</li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="u-size-18">
+                                <div class="u-layout-col">
+                                    <div class="u-container-style u-layout-cell u-left-cell u-size-60 u-layout-cell-4">
+                                        <div class="u-container-layout u-valign-middle u-container-layout-4">
+                                            <div class="u-form u-form-1">
+                                                <div class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" name="form">
+                                                    <form asp-action="StartGrowOrder">
+                                                        <div class="u-align-center u-form-group u-form-submit">
+                                                            <input type="hidden" asp-for="@Order.Id" value="@Order.Id" />
+                                                            @if (Order.Status == "Не начат")
+                                                            {
+                                                                <input type="submit" value="Начать" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
+                                                            }
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    }
+    <section class="u-clearfix u-section-4" id="carousel_ff07">
+        <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+            <h2 class="u-text u-text-default u-text-1">Вчера</h2>
+        </div>
+    </section>
+    @foreach (var Order in Model.Yesterday)
+    {
 <section class="u-clearfix u-section-3" id="sec-208f">
     <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
@@ -56,13 +137,17 @@
                                         <div class="u-container-layout u-container-layout-1">
                                             <h2 class="u-text u-text-default u-text-1"><a href="~/Home/Order?OrderId=@Order.Id">Заказ @Order.Id</a></h2>
                                             <h3 class="u-text u-text-default u-text-2">@Order.UserName</h3>
-                                            <h4 class="u-text u-text-default u-text-3">@Order.Created</h4>
                                         </div>
                                     </div>
-                                    <div class="u-align-center u-container-style u-layout-cell u-size-27 u-layout-cell-2">
-                                        <div class="u-container-layout u-valign-middle u-container-layout-2">
-                                            <h3 class="u-text u-text-default u-text-4">@Order.Status</h3>
-                                        </div>
+                                    <div class="u-container-style u-layout-cell u-size-27 u-layout-cell-2">
+                                        <div class="u-container-layout u-valign-top u-container-layout-2">
+                                            <h4 class="u-text u-text-default u-text-3">@Order.Created.ToShortDateString()</h4>
+                                            <h3 class="u-align-center u-text u-text-default u-text-4">@Order.Status</h3>
+                                            @if (Order.Harvest != null)
+                                            {
+                                                <h4 class="u-align-center u-text u-text-default u-text-5">@Order.Harvest.Value.ToShortDateString()</h4>
+                                            }
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +155,7 @@
                                 <div class="u-layout-row">
                                     <div class="u-container-style u-layout-cell u-right-cell u-size-60 u-layout-cell-3">
                                         <div class="u-container-layout u-container-layout-3">
-                                            <ul class="u-text u-text-5">
+                                            <ul class="u-text u-text-6">
                                                 @foreach (var el in Order.OrderElements)
                                                 {
                                                     string amount = el.Count == 1 ? "" : "x" + el.Count;
@@ -111,81 +196,6 @@
     </div>
 </section>
     }
-    <section class="u-clearfix u-section-4" id="carousel_ff07">
-        <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-            <h2 class="u-text u-text-default u-text-1">Вчера</h2>
-        </div>
-    </section>
-    @foreach (var Order in Model.Yesterday)
-    {
-        <section class="u-clearfix u-section-3" id="sec-208f">
-            <div class="u-clearfix u-sheet u-sheet-1">
-                <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
-                    <div class="u-gutter-0 u-layout">
-                        <div class="u-layout-row">
-                            <div class="u-size-42">
-                                <div class="u-layout-col">
-                                    <div class="u-size-30">
-                                        <div class="u-layout-row">
-                                            <div class="u-container-style u-layout-cell u-right-cell u-size-33 u-layout-cell-1">
-                                                <div class="u-container-layout u-container-layout-1">
-                                                    <h2 class="u-text u-text-default u-text-1"><a href="~/Home/Order?OrderId=@Order.Id">Заказ @Order.Id</a></h2>
-                                                    <h3 class="u-text u-text-default u-text-2">@Order.UserName</h3>
-                                                    <h4 class="u-text u-text-default u-text-3">@Order.Created</h4>
-                                                </div>
-                                            </div>
-                                            <div class="u-align-center u-container-style u-layout-cell u-size-27 u-layout-cell-2">
-                                                <div class="u-container-layout u-valign-middle u-container-layout-2">
-                                                    <h3 class="u-text u-text-default u-text-4">@Order.Status</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="u-size-30">
-                                        <div class="u-layout-row">
-                                            <div class="u-container-style u-layout-cell u-right-cell u-size-60 u-layout-cell-3">
-                                                <div class="u-container-layout u-container-layout-3">
-                                                    <ul class="u-text u-text-5">
-                                                        @foreach (var el in Order.OrderElements)
-                                                        {
-                                                            string amount = el.Count == 1 ? "" : "x" + el.Count;
-
-                                                            <li>@el.item.Name @amount</li>
-                                                        }
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="u-size-18">
-                                <div class="u-layout-col">
-                                    <div class="u-container-style u-layout-cell u-left-cell u-size-60 u-layout-cell-4">
-                                        <div class="u-container-layout u-valign-middle u-container-layout-4">
-                                            <div class="u-form u-form-1">
-                                                <div class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" name="form">
-                                                    <form asp-action="StartGrowOrder">
-                                                        <div class="u-align-center u-form-group u-form-submit">
-                                                            <input type="hidden" asp-for="@Order.Id" value="@Order.Id" />
-                                                            @if (Order.Status == "Не начат")
-                                                            {
-                                                                <input type="submit" value="Начать" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
-                                                            }
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    }
     <section class="u-clearfix u-section-6" id="carousel_10bf">
         <div class="u-clearfix u-sheet u-sheet-1">
             <h2 class="u-text u-text-default u-text-1">
@@ -208,13 +218,17 @@
                                         <div class="u-container-layout u-container-layout-1">
                                             <h2 class="u-text u-text-default u-text-1"><a href="~/Home/Order?OrderId=@Order.Id">Заказ @Order.Id</a></h2>
                                             <h3 class="u-text u-text-default u-text-2">@Order.UserName</h3>
-                                            <h4 class="u-text u-text-default u-text-3">@Order.Created</h4>
                                         </div>
                                     </div>
-                                    <div class="u-align-center u-container-style u-layout-cell u-size-27 u-layout-cell-2">
-                                        <div class="u-container-layout u-valign-middle u-container-layout-2">
-                                            <h3 class="u-text u-text-default u-text-4">@Order.Status</h3>
-                                        </div>
+                                    <div class="u-container-style u-layout-cell u-size-27 u-layout-cell-2">
+                                        <div class="u-container-layout u-valign-top u-container-layout-2">
+                                            <h4 class="u-text u-text-default u-text-3">@Order.Created.ToShortDateString()</h4>
+                                            <h3 class="u-align-center u-text u-text-default u-text-4">@Order.Status</h3>
+                                            @if (Order.Harvest != null)
+                                            {
+                                                <h4 class="u-align-center u-text u-text-default u-text-5">@Order.Harvest.Value.ToShortDateString()</h4>
+                                            }
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -222,7 +236,7 @@
                                 <div class="u-layout-row">
                                     <div class="u-container-style u-layout-cell u-right-cell u-size-60 u-layout-cell-3">
                                         <div class="u-container-layout u-container-layout-3">
-                                            <ul class="u-text u-text-5">
+                                            <ul class="u-text u-text-6">
                                                 @foreach (var el in Order.OrderElements)
                                                 {
                                                     string amount = el.Count == 1 ? "" : "x" + el.Count;

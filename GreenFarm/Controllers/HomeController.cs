@@ -186,7 +186,7 @@ namespace GreenFarm.Controllers
                     orderElement.GrowStart = DateTime.Now.AddDays(maxGrowDays - orderElement.item.GrowDays);
                     orderElement.HarvestDate = orderElement.GrowStart.AddDays(orderElement.item.GrowDays);
                 }
-
+                order.Harvest = order.Created.AddDays(maxGrowDays);
                 order.Status = "В процессе";
                 db.SaveChanges();
             }
