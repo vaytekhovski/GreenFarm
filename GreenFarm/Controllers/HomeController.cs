@@ -194,6 +194,31 @@ namespace GreenFarm.Controllers
             return RedirectToAction("Orders");
         }
 
+        public IActionResult OrderIsGrowed(Order order)
+        {
+            using (Database db = new Database())
+            {
+                order = db.Orders.First(x => x.Id == order.Id);
+                order.Status = "Завершен";
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Orders");
+        }
+
+        public IActionResult OrderIsDelivered(Order order)
+        {
+            using (Database db = new Database())
+            {
+                order = db.Orders.First(x => x.Id == order.Id);
+                order.Status = "Доставлен";
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Orders");
+        }
+
+
         public IActionResult StartGrowElement(OrderElement element)
         {
             using(Database db = new Database())

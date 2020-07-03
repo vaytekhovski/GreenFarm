@@ -61,11 +61,11 @@
                                             </div>
                                             <div class="u-container-style u-layout-cell u-size-27 u-layout-cell-2">
                                                 <div class="u-container-layout u-valign-top u-container-layout-2">
-                                                    <h4 class="u-text u-text-default u-text-3">@Order.Created.ToShortDateString()</h4>
+                                                    <h4 class="u-text u-text-default u-text-3">@Order.Created.ToString("M")</h4>
                                                     <h3 class="u-align-center u-text u-text-default u-text-4">@Order.Status</h3>
                                                     @if (Order.Harvest != null)
                                                     {
-                                                    <h4 class="u-align-center u-text u-text-default u-text-5">@Order.Harvest.Value.ToShortDateString()</h4>
+                                                    <h4 class="u-align-center u-text u-text-default u-text-5">@Order.Harvest.Value.ToString("M")</h4>
                                                     }
                                                 </div>
                                             </div>
@@ -95,12 +95,20 @@
                                         <div class="u-container-layout u-valign-middle u-container-layout-4">
                                             <div class="u-form u-form-1">
                                                 <div class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" name="form">
-                                                    <form asp-action="StartGrowOrder">
+                                                    <form >
                                                         <div class="u-align-center u-form-group u-form-submit">
                                                             <input type="hidden" asp-for="@Order.Id" value="@Order.Id" />
                                                             @if (Order.Status == "Не начат")
                                                             {
-                                                                <input type="submit" value="Начать" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
+                                                                <input type="submit" asp-action="StartGrowOrder" value="Начать" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
+                                                            }
+                                                            else if (Order.Status == "В процессе")
+                                                            {
+                                                                <input type="submit" asp-action="OrderIsGrowed" value="Завершить" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
+                                                            }
+                                                            else if (Order.Status == "Завершен")
+                                                            {
+                                                                <input type="submit" asp-action="OrderIsDelivered" value="Доставлен" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
                                                             }
                                                         </div>
                                                     </form>
@@ -141,11 +149,11 @@
                                     </div>
                                     <div class="u-container-style u-layout-cell u-size-27 u-layout-cell-2">
                                         <div class="u-container-layout u-valign-top u-container-layout-2">
-                                            <h4 class="u-text u-text-default u-text-3">@Order.Created.ToShortDateString()</h4>
+                                            <h4 class="u-text u-text-default u-text-3">@Order.Created.ToString("M")</h4>
                                             <h3 class="u-align-center u-text u-text-default u-text-4">@Order.Status</h3>
                                             @if (Order.Harvest != null)
                                             {
-                                                <h4 class="u-align-center u-text u-text-default u-text-5">@Order.Harvest.Value.ToShortDateString()</h4>
+                                                <h4 class="u-align-center u-text u-text-default u-text-5">@Order.Harvest.Value.ToString("M")</h4>
                                             }
                                             </div>
                                     </div>
@@ -181,6 +189,14 @@
                                                     @if (Order.Status == "Не начат")
                                                     {
                                                         <input type="submit" value="Начать" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
+                                                    }
+                                                    else if (Order.Status == "В процессе")
+                                                    {
+                                                        <input type="submit" asp-action="OrderIsGrowed" value="Завершить" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
+                                                    }
+                                                    else if (Order.Status == "Завершен")
+                                                    {
+                                                        <input type="submit" asp-action="OrderIsDelivered" value="Доставлен" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
                                                     }
                                                 </div>
                                             </form>
@@ -222,11 +238,11 @@
                                     </div>
                                     <div class="u-container-style u-layout-cell u-size-27 u-layout-cell-2">
                                         <div class="u-container-layout u-valign-top u-container-layout-2">
-                                            <h4 class="u-text u-text-default u-text-3">@Order.Created.ToShortDateString()</h4>
+                                            <h4 class="u-text u-text-default u-text-3">@Order.Created.ToString("M")</h4>
                                             <h3 class="u-align-center u-text u-text-default u-text-4">@Order.Status</h3>
                                             @if (Order.Harvest != null)
                                             {
-                                                <h4 class="u-align-center u-text u-text-default u-text-5">@Order.Harvest.Value.ToShortDateString()</h4>
+                                                <h4 class="u-align-center u-text u-text-default u-text-5">@Order.Harvest.Value.ToString("M")</h4>
                                             }
                                             </div>
                                     </div>
@@ -262,6 +278,14 @@
                                                     @if (Order.Status == "Не начат")
                                                     {
                                                         <input type="submit" value="Начать" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
+                                                    }
+                                                    else if (Order.Status == "В процессе")
+                                                    {
+                                                        <input type="submit" asp-action="OrderIsGrowed" value="Завершить" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
+                                                    }
+                                                    else if (Order.Status == "Завершен")
+                                                    {
+                                                        <input type="submit" asp-action="OrderIsDelivered" value="Доставлен" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
                                                     }
                                                 </div>
                                             </form>
