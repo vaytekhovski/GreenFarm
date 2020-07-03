@@ -92,13 +92,9 @@ namespace GreenFarm.Controllers
 
             OrdersModel Model = new OrdersModel();
 
-            var Today = OrderList.Where(x => x.Created.Date == DateTime.Now.Date).ToList();
-            var Yesterday = OrderList.Where(x => x.Created.Date == DateTime.Now.Date.AddDays(-1)).ToList();
-            var Before = OrderList.Where(x => x.Created.Date < DateTime.Now.Date.AddDays(-1)).ToList();
-
-            Model.Today = Today;
-            Model.Yesterday = Yesterday;
-            Model.Before = Before;
+            Model.Today = OrderList.Where(x => x.Created.Date == DateTime.Now.Date).OrderByDescending(x => x.Id).ToList();
+            Model.Yesterday = OrderList.Where(x => x.Created.Date == DateTime.Now.Date.AddDays(-1)).OrderByDescending(x => x.Id).ToList();
+            Model.Before = OrderList.Where(x => x.Created.Date < DateTime.Now.Date.AddDays(-1)).OrderByDescending(x => x.Id).ToList();
 
             return View(Model);
         }
