@@ -190,19 +190,20 @@ namespace GreenFarm.Controllers
             return RedirectToAction("Orders");
         }
 
-        public IActionResult OrderIsGrowed(Order order)
+        public IActionResult OrderGrowed(Order order)
         {
             using (Database db = new Database())
             {
                 order = db.Orders.First(x => x.Id == order.Id);
                 order.Status = "Завершен";
+                order.Harvest = DateTime.Now;
                 db.SaveChanges();
             }
 
             return RedirectToAction("Orders");
         }
 
-        public IActionResult OrderIsDelivered(Order order)
+        public IActionResult OrderDelivered(Order order)
         {
             using (Database db = new Database())
             {
