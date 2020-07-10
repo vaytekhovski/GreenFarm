@@ -48,12 +48,12 @@ namespace GreenFarm.Controllers
             CalendarModel model = new CalendarModel();
             using(Database db = new Database())
             {
-                
+                DateTime StartDate = DateTime.Now.AddDays(-1);
                 var Orders = db.Orders.ToList();
                 foreach (var order in Orders)
                 {
                     order.OrderElements = db.OrderElements
-                        .Where(x => x.GrowStart.Date >= DateTime.Now.Date || x.GrowStart == null)
+                        .Where(x => x.GrowStart.Date >= StartDate.Date)
                         .Where(x => x.OrderId == order.Id)
                         .ToList();
 
@@ -63,7 +63,8 @@ namespace GreenFarm.Controllers
                         orderElement.UserName = order.UserName;
                     }
 
-                    
+
+                    model.Yesterday.AddRange(order.OrderElements.Where(x => x.GrowStart.Date == DateTime.Now.Date.AddDays(-1)));
                     model.Today.AddRange(order.OrderElements.Where(x => x.GrowStart.Date == DateTime.Now.Date));
                     model.Tomorrow.AddRange(order.OrderElements.Where(x => x.GrowStart.Date == DateTime.Now.Date.AddDays(1)));
                     model.DayAfterTomorrow.AddRange(order.OrderElements.Where(x => x.GrowStart.Date == DateTime.Now.Date.AddDays(2)));

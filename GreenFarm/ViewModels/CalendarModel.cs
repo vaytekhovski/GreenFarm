@@ -8,12 +8,14 @@ namespace GreenFarm.ViewModels
     {
         public CalendarModel()
         {
+            Yesterday = new List<OrderElement>();
             Today = new List<OrderElement>();
             Tomorrow = new List<OrderElement>();
             DayAfterTomorrow = new List<OrderElement>();
             Next = new List<OrderElement>();
         }
 
+        public List<OrderElement> Yesterday { get; set; }
         public List<OrderElement> Today { get; set; }
         public List<OrderElement> Tomorrow { get; set; }
         public List<OrderElement> DayAfterTomorrow { get; set; }

@@ -35,6 +35,50 @@
 
     <section class="u-clearfix u-section-1" id="sec-fff9">
         <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+            <h2 class="u-text u-text-default u-text-1">Вчера</h2>
+        </div>
+    </section>
+    @foreach (var element in Model.Yesterday)
+    {
+        string amount = element.Count == 1 ? "" : "x" + element.Count;
+        <section class="u-align-center-xs u-clearfix u-section-2" id="sec-c318">
+            <div class="u-clearfix u-sheet u-sheet-1">
+                <img src="@element.item.ImagePath" alt="" class="u-image u-image-contain u-image-default u-image-1" data-image-width="1024" data-image-height="683">
+                <h3 class="u-text u-text-1">
+
+                    @element.item.Name @amount<br>
+                </h3>
+                <ul class="u-text u-text-body-alt-color u-text-default u-text-2">
+                    <li style="">Прижим @element.item.ClipDays дня</li>
+                    <li style="">В темноте @element.item.BlackOutDays дня</li>
+                    <li style="">Дата созревания через @element.item.GrowDays дней - @element.HarvestDate.ToString("M")</li>
+                </ul>
+                <div class="u-form u-form-1">
+                    <div class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" name="form">
+                        <form asp-action="StartGrowElement" asp-controller="Home">
+                            <div class="u-align-left u-form-group u-form-submit">
+                                <input type="hidden" asp-for="@element.Id" value="@element.Id" />
+                                @if (element.isGrow)
+                                {
+                                    <input disabled type="submit" value="Растёт" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
+
+                                }
+                                else
+                                {
+                                    <input type="submit" value="Посадил" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
+                                }
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <h5 class="u-text u-text-default u-text-3">для @element.UserName <a href="~/Home/Order?OrderId=@element.OrderId"># @element.OrderId</a></h5>
+            </div>
+        </section>
+    }
+    <section class="u-clearfix u-section-1" id="sec-fff9">
+        <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
             <h2 class="u-text u-text-default u-text-1">Сегодня</h2>
         </div>
     </section>
@@ -62,10 +106,10 @@
                                 {
                                     <input disabled type="submit" value="Растёт" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
 
-                                }   
+                                }
                                 else
                                 {
-                                <input type="submit" value="Посадил" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
+                                    <input type="submit" value="Посадил" class="u-border-2 u-border-palette-1-light-3 u-btn u-btn-rectangle u-btn-submit u-button-style u-none u-btn-1">
                                 }
                             </div>
                         </form>
